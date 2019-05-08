@@ -1,7 +1,7 @@
 # Firedrones
 
 ## Preview
-![Preview](https://image.ibb.co/e5uBf0/Capture.png)
+![Imgur](https://i.imgur.com/Yy0CidV.jpg)
 
 ## How to use
 1. Clone/Download the repo.
