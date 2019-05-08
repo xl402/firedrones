@@ -1,4 +1,9 @@
 # Firedrones
+Find out more on:
+https://firedrones-19.firebaseapp.com/
+
+Submitted as part of the Sudo City Challenge : https://www.sudochallenge.com/
+
 **Participants**:
 - Rory Xiao - Machine Learning Research
 - Jonty Page - Machine Learning Engineer
