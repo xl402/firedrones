@@ -1,4 +1,12 @@
 # Firedrones
+**Participants**:
+- Rory Xiao - Machine Learning Research
+- Jonty Page - Machine Learning Engineer
+- Ellen Skipper - Front End Developer
+- Adian Liusie - Algorithm Research
+- Vyas Raina - Backend Developer
+- Tom Lu - System Architect
+
 
 ## Preview
 ![Imgur](https://i.imgur.com/W8vwgOU.png)
