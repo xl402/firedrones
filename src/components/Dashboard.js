@@ -52,8 +52,6 @@ export default class Dashboard extends Component {
   render() {
 
     var { isLoaded, incidents } = this.state;
-    console.log(incidents.length);
-
     if (!isLoaded) {
       return (
         // Show loading screen
