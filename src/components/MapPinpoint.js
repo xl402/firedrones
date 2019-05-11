@@ -15,9 +15,9 @@ const pinpointStyle = {
     position: 'relative',
   }
 
-const imgStyle = {width: '150px'}
+const imgStyle = {maxWidth: '150px', maxHeight: '130px'}
 
-const popupStyle = {background: '#e25a09', position: 'absolute', transform: 'translate(0%, -80%)', padding: '5px', borderRadius: '7px', zIndex: 99  }
+const popupStyle = {background: '#e25a09', position: 'absolute', transform: 'translate(0px, -110px)', height: '164px', padding: '5px', borderRadius: '7px', zIndex: 99  }
 
 export default class MyGreatPlaceWithHover extends Component {
     static defaultProps = {};
@@ -33,7 +33,7 @@ export default class MyGreatPlaceWithHover extends Component {
     const popupHoverStyle = this.props.$hover ? popupStyle : {display:'none', zIndex: 99  };
     const divHoverStyle = this.props.$hover ? {...pinpointStyle, zIndex: 99} : pinpointStyle;
     return (
-       <div style={divHoverStyle}>
+       <div style={divHoverStyle} onClick={this.props.setIncident}>
           {this.props.text}
           <div className='imgcontainer' style={popupHoverStyle}>
           <img style={imgStyle} className="mapImage" src={'data:image/png;base64,'.concat(this.props.imgcode)} alt=''/>

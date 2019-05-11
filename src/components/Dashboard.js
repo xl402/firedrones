@@ -7,11 +7,13 @@ export default class Dashboard extends Component {
 
   constructor(props) {
     super(props);
+    this.setIncident = this.setIncident.bind(this);
     this.state = {
       incidents: [],
       drones: [],
       isIncidentsLoaded: false,
       isDronesLoaded: false,
+      selectedIncident: '',
     }
   }
 
@@ -46,6 +48,10 @@ export default class Dashboard extends Component {
 
   shouldComponentUpdate = shouldPureComponentUpdate;
 
+  setIncident(id) {
+    this.setState({selectedIncident: id});
+  }
+
   render() {
 
     var { incidents, drones, isIncidentsLoaded, isDronesLoaded } = this.state;
@@ -67,6 +73,7 @@ export default class Dashboard extends Component {
           <div className="row banner">
 
             <h1>Dashboard</h1>
+            {this.state.selectedIncident}
             <div style={{ height: '60vh', width: '100%' }}>
                   <GoogleMapReact
                     bootstrapURLKeys={""}
@@ -80,17 +87,15 @@ export default class Dashboard extends Component {
                         lat={incident.location._latitude}
                         lng={incident.location._longitude}
                         text={incident.severity}
-                        key={incident.description}
+                        key={incident.id}
                         imgcode={incident.image}
                         description={incident.description}
+                        setIncident={() => this.setIncident(incident.id)}
                       />
                     )
                   })}
                   </GoogleMapReact> 
                 </div>
-
-
-
           </div>
         </section>
       );
