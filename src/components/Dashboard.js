@@ -1,22 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
-
-const AnyReactComponent = ({ text }) => (
-  <div style={{
-    color: 'white',
-    background: '#e25a09',
-    padding: '6px 9px',
-    display: 'inline-flex',
-    textAlign: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: '100%',
-    transform: 'translate(-50%, -50%)'
-  }}>
-    {text}
-  </div>
-);
-
+import MapPinpoint from './MapPinpoint';
+import shouldPureComponentUpdate from 'react-pure-render/function';
 
 export default class Dashboard extends Component {
 
@@ -49,6 +34,8 @@ export default class Dashboard extends Component {
     zoom: 8
   };
 
+  shouldComponentUpdate = shouldPureComponentUpdate;
+
   render() {
 
     var { isLoaded, incidents } = this.state;
@@ -70,24 +57,26 @@ export default class Dashboard extends Component {
           <div className="row banner">
 
             <h1>Dashboard</h1>
-                <div style={{ height: '60vh', width: '100%' }}>
-
+            <div style={{ height: '60vh', width: '100%' }}>
                   <GoogleMapReact
                     bootstrapURLKeys={""}
                     defaultCenter={this.props.center}
                     defaultZoom={this.props.zoom}
+                    hoverDistance='5'
                   >
                   {incidents.map(incident => {
                     return (
-                      <AnyReactComponent
+                      <MapPinpoint
                         lat={incident.location._latitude}
                         lng={incident.location._longitude}
                         text={incident.severity}
                         key={incident.description}
+                        imgcode={incident.image}
+                        description={incident.description}
                       />
                     )
                   })}
-                  </GoogleMapReact>
+                  </GoogleMapReact> 
                 </div>
 
 

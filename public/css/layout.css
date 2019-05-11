@@ -314,6 +314,20 @@ ul#nav li.current a { color: #F06000; }
 	filter:alpha(opacity=100);
 }
 
+.imgcontainer:after {
+	content: '';
+	position: absolute;
+   bottom: 0;
+	left: 50%;
+	width: 0;
+	height: 0;
+	border: 10px solid transparent;
+	border-top-color: #e25a09;
+	border-bottom: 0;
+	margin-left: -10px;
+	margin-bottom: -10px;
+}
+
 /* popup modal */
 .popup-modal {
 	max-width: 550px;
