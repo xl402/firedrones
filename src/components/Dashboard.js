@@ -66,6 +66,8 @@ export default class Dashboard extends Component {
       )
     }
     else{
+      const selectedIncidentId = this.state.selectedIncident;
+      const selectedIncidentInfo = incidents.find(incident => incident.id === selectedIncidentId);
       return (
         //Lets hack from here?
         //https://github.com/google-map-react/old-examples/blob/master/web/flux/components/examples/x_main/main_map_block.jsx
@@ -73,8 +75,7 @@ export default class Dashboard extends Component {
           <div className="row banner">
 
             <h1>Dashboard</h1>
-            {this.state.selectedIncident}
-            <div style={{ height: '60vh', width: '100%' }}>
+            <div style={{ height: '60vh', width: '100%', display: 'flex' }}>
                   <GoogleMapReact
                     bootstrapURLKeys={""}
                     defaultCenter={this.props.center}
@@ -95,7 +96,17 @@ export default class Dashboard extends Component {
                     )
                   })}
                   </GoogleMapReact> 
+                <div style={{height: '100%', width: '30%', background: 'blue'}}>
+                  <p>
+                    Selected Incident:
+                    {selectedIncidentInfo && ' '+selectedIncidentInfo.id} 
+                  </p>
+                  <p>
+                    Description: 
+                    {selectedIncidentInfo && ' '+selectedIncidentInfo.description}
+                  </p>
                 </div>
+              </div>
           </div>
         </section>
       );
