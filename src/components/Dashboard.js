@@ -73,7 +73,7 @@ export default class Dashboard extends Component {
                 <div style={{ height: '60vh', width: '100%' }}>
 
                   <GoogleMapReact
-                    bootstrapURLKeys={{ key: "AIzaSyA_EtKeVpcy-tJ2bkLk3v27QIJnSrEQK-Q" }}
+                    bootstrapURLKeys={""}
                     defaultCenter={this.props.center}
                     defaultZoom={this.props.zoom}
                   >

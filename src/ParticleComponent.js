@@ -83,15 +83,23 @@ export default () => (
         "mode": "grab"
       },
       "onclick": {
-        "enable": false,
+        "enable": true,
+        "mode": "bubble"
       },
       "resize": true
     },
     "modes": {
       "grab": {
-        "distance": 350,
+        "distance": 220,
         "line_linked": {
           "opacity": 1
+        },
+        "bubble": {
+          "distance": 800,
+          "size": 80,
+          "duration": 2,
+          "opacity": 0.8,
+          "speed": 3
         }
       }
     }
