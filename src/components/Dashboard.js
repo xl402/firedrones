@@ -9,7 +9,9 @@ export default class Dashboard extends Component {
     super(props);
     this.state = {
       incidents: [],
-      isLoaded: false,
+      drones: [],
+      isIncidentsLoaded: false,
+      isDronesLoaded: false,
     }
   }
 
@@ -19,8 +21,16 @@ export default class Dashboard extends Component {
       .then(res => res.json())
       .then(json => {
         this.setState({
-          isLoaded:true,
+          isIncidentsLoaded: true,
           incidents: json,
+        })
+      });
+      fetch("https://us-central1-firedrones-19.cloudfunctions.net/getDrones")
+      .then(res => res.json())
+      .then(json => {
+        this.setState({
+          isDronesLoaded: true,
+          drones: json,
         })
       });
   }
@@ -38,8 +48,8 @@ export default class Dashboard extends Component {
 
   render() {
 
-    var { isLoaded, incidents } = this.state;
-    if (!isLoaded) {
+    var { incidents, drones, isIncidentsLoaded, isDronesLoaded } = this.state;
+    if (!isIncidentsLoaded || !isDronesLoaded) {
       return (
         // Show loading screen
         <section id="portfolio">
@@ -62,7 +72,7 @@ export default class Dashboard extends Component {
                     bootstrapURLKeys={""}
                     defaultCenter={this.props.center}
                     defaultZoom={this.props.zoom}
-                    hoverDistance='5'
+                    hoverDistance={10}
                   >
                   {incidents.map(incident => {
                     return (

@@ -32,12 +32,11 @@ export default class MyGreatPlaceWithHover extends Component {
   render() {
     const popupHoverStyle = this.props.$hover ? popupStyle : {display:'none', zIndex: 99  };
     const divHoverStyle = this.props.$hover ? {...pinpointStyle, zIndex: 99} : pinpointStyle;
-console.log(this.props.description);
     return (
        <div style={divHoverStyle}>
           {this.props.text}
           <div className='imgcontainer' style={popupHoverStyle}>
-          <img style={imgStyle} class="mapImage" src={'data:image/png;base64,'.concat(this.props.imgcode)} alt=''/>
+          <img style={imgStyle} className="mapImage" src={'data:image/png;base64,'.concat(this.props.imgcode)} alt=''/>
           {this.props.description}
           </div>
        </div>
