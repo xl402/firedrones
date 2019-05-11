@@ -83,6 +83,7 @@ export default class Dashboard extends Component {
                         lat={incident.location._latitude}
                         lng={incident.location._longitude}
                         text={incident.severity}
+                        key={incident.description}
                       />
                     )
                   })}
