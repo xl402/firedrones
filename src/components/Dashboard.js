@@ -212,7 +212,7 @@ export default class Dashboard extends Component {
           {processingState} 
         <br/>
           <b>Assigned drones:</b> <br/>
-          {assignedDrone ? assignedDrone : 'Currently none assigned'}<br/>
+          {assignedDrone ? assignedDrone.id : 'Currently none assigned'}<br/>
           <button style={{marginTop: '12px'}} onClick={() => this.deleteIncident(selectedIncidentId)}>
             Delete Incident
           </button><br/>
