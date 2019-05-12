@@ -85,11 +85,12 @@ export default class Dashboard extends Component {
     this.setState({selectedIncident: '', selectedDrone: id});
   }
 
-  //Toggles drone recall- TBD
+  //Toggles drone recall
   recallDrone(id) {
     const drones = this.state.drones;
     const recalledDrone = drones.find(drone => drone.id === id);
-    const insertData = "{\n\t\"drone_id\" : \"" +recalledDrone.id+"\",\n\t\"d_lon\":"+recalledDrone.current_pos._longitude+",\n\t\"d_lat\": "+recalledDrone.current_pos._latitude+",\n\t\"event_id\" : \"\" ,\n\t\"speed\": "+recalledDrone.speed+",\n\t\"capacity\": "+recalledDrone.capacity+",\n\t\"isRecall\" : true\n}"
+    const insertData = recalledDrone.isRecall ? "{\n\t\"drone_id\" : \"" +recalledDrone.id+"\",\n\t\"d_lon\":"+recalledDrone.current_pos._longitude+",\n\t\"d_lat\": "+recalledDrone.current_pos._latitude+",\n\t\"event_id\" : \"\" ,\n\t\"speed\": "+recalledDrone.speed+",\n\t\"capacity\": "+recalledDrone.capacity+",\n\t\"isRecall\" : false\n}" :
+    "{\n\t\"drone_id\" : \"" +recalledDrone.id+"\",\n\t\"d_lon\":"+recalledDrone.current_pos._longitude+",\n\t\"d_lat\": "+recalledDrone.current_pos._latitude+",\n\t\"event_id\" : \"\" ,\n\t\"speed\": "+recalledDrone.speed+",\n\t\"capacity\": "+recalledDrone.capacity+",\n\t\"isRecall\" : true\n}"
     var settings = {
       "async": true,
       "crossDomain": true,
@@ -287,7 +288,7 @@ export default class Dashboard extends Component {
         <b>Assigned to incident:</b><br/>
           {selectedDroneInfo.event_id ? selectedDroneInfo.event_id : 'Currently unassigned'}<br/>
           <button className='drone-button' onClick={() => this.recallDrone(selectedDroneId)}>
-            Recall Drone
+          {selectedDroneInfo.isRecall ? 'Release Drone' : 'Recall Drone'}
           </button>
         </div>
       }
