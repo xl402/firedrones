@@ -3,7 +3,6 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 
 const pinpointStyle = {
     color: 'white',
-    background: '#e25a09',
     padding: '6px 9px',
     display: 'inline-flex',
     textAlign: 'center',
@@ -31,7 +30,24 @@ export default class IncidentPinpoint extends Component {
 
   render() {
     const popupHoverStyle = this.props.$hover ? popupStyle : {display:'none', zIndex: 99  };
-    const divHoverStyle = this.props.$hover ? {...pinpointStyle, zIndex: 99} : pinpointStyle;
+    let pinpointColor;
+    switch(this.props.processed) {
+      case 0:
+      pinpointColor={background: 'red'}
+    break;
+    case 1:
+      pinpointColor={background: '#e25a09'}
+    break;
+    case 2:
+      pinpointColor={background: '#ffcc00'}
+    break;
+    case 3:
+      pinpointColor={background: 'green'}
+    break;
+    default:
+      pinpointColor={background: '#e25a09'}
+    }
+    const divHoverStyle = this.props.$hover ? {...pinpointStyle, ...pinpointColor, zIndex: 99} : {...pinpointStyle, ...pinpointColor};
     return (
        <div style={divHoverStyle} onClick={this.props.setIncident}>
           {this.props.text}

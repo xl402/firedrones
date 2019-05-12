@@ -301,6 +301,7 @@ export default class Dashboard extends Component {
                         key={incident.id}
                         imgcode={incident.image}
                         description={incident.description}
+                        processed={incident.processed}
                         setIncident={() => this.setIncident(incident.id)}
                       />
                     )
@@ -312,6 +313,7 @@ export default class Dashboard extends Component {
                         lng={drone.current_pos._longitude}
                         key={drone.id}
                         eventId={drone.event_id}
+                        capacity={drone.capacity}
                         setDrone={() => this.setDrone(drone.id)}
                       />
                     )
