@@ -61,6 +61,12 @@ export default class Dashboard extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   updateMap() {
+    if (this.state.isIncidentsLoaded && this.state.isDronesLoaded) {
+      const unprocessedIncidents = this.state.incidents.filter(incident => incident.processed === 0);
+      unprocessedIncidents.forEach(incident => { 
+            this.changeProcessing(incident.id, 1);
+          });
+    }
     fetch("https://us-central1-firedrones-19.cloudfunctions.net/getIncidents")
       .then(res => res.json())
       .then(json => {
@@ -77,15 +83,6 @@ export default class Dashboard extends Component {
           drones: json,
         })
       });
-      // if (this.state.isIncidentsLoaded && this.state.isDronesLoaded) {
-      //   const unprocessedIncidents = this.state.incidents.filter(incident => incident.processed === 0);
-      //   const unprocessedImageCodes = unprocessedIncidents.map(incident => incident.image);
-      //   console.log(unprocessedImageCodes);
-      //   unprocessedIncidents.forEach(incident => { 
-      //     var filepath = base64Img.imgSync('data:image/png;base64,'.concat(incident.image), '', incident.id);
-      //     console.log('file created?'+incident.id);
-      //   });
-      // }
   }
 
   setIncident(id) {
