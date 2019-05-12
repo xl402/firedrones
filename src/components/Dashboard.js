@@ -113,11 +113,13 @@ export default class Dashboard extends Component {
     }
 
     $.ajax(settings).done(function (response) {
-      console.log(response);
-    });
+      console.log(response)
+    }).then(() => this.updateMap());
   }
+
   deleteIncident(id) {
     console.log('Delete Incident '+id)
+    this.updateMap();
   }
 
   changeSeverity(id, severity) {
@@ -147,7 +149,7 @@ export default class Dashboard extends Component {
 
     $.ajax(settings).done(function (response) {
       console.log(response);
-    });
+    }).then(() => this.updateMap());
   }
 
   changeProcessing(id, processing) {
@@ -176,8 +178,8 @@ export default class Dashboard extends Component {
     }
 
     $.ajax(settings).done(function (response) {
-      console.log(response);
-    });
+      console.log(response)
+    }).then(() => this.updateMap());
   }
 
   render() {
