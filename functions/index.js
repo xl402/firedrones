@@ -165,3 +165,27 @@ exports.changeIncident = functions.https.onRequest((req, res) => {
       });
   });
 })
+
+
+exports.changeIncident2 = functions.https.onRequest((req, res) => {
+  cors(req, res, () => {
+    if(req.method != 'PUT') {
+      return res.status(400).json({ error: 'Method not allowed'});
+    }
+    admin
+      .firestore()
+      .collection('incidents')
+      .doc(req.body.incident_id)
+      .update({
+        processed: req.body.processed,
+        severity: req.body.severity,
+      })
+      .then(doc => {
+        res.json({ message: `Incident ${doc.id} updated successfully`});
+      })
+      .catch(err => {
+        res.status(500).json({ error: 'something went wrong'});
+        console.error(err);
+      });
+  });
+})
