@@ -55,7 +55,7 @@ export default class Dashboard extends Component {
       lat: 51.5,
       lng: -0.12
     },
-    zoom: 8
+    zoom: 6
   };
 
   shouldComponentUpdate = shouldPureComponentUpdate;
@@ -81,7 +81,7 @@ export default class Dashboard extends Component {
       //   const unprocessedIncidents = this.state.incidents.filter(incident => incident.processed === 0);
       //   const unprocessedImageCodes = unprocessedIncidents.map(incident => incident.image);
       //   console.log(unprocessedImageCodes);
-      //   unprocessedIncidents.forEach(incident => { 
+      //   unprocessedIncidents.forEach(incident => {
       //     var filepath = base64Img.imgSync('data:image/png;base64,'.concat(incident.image), '', incident.id);
       //     console.log('file created?'+incident.id);
       //   });
@@ -137,7 +137,7 @@ export default class Dashboard extends Component {
     const incidents = this.state.incidents;
     const selectedIncident = incidents.find(incident => incident.id === id);
     const insertData = "{\n\t\"processed\": "+selectedIncident.processed+",\n\t\"severity\": "+severity+",\n\t\"incident_id\": \""+selectedIncident.id+"\" \n}"
-  
+
   var settings = {
     "async": true,
     "crossDomain": true,
@@ -167,7 +167,7 @@ export default class Dashboard extends Component {
     const incidents = this.state.incidents;
     const selectedIncident = incidents.find(incident => incident.id === id);
     const insertData = "{\n\t\"processed\": "+processing+",\n\t\"severity\": "+selectedIncident.severity+",\n\t\"incident_id\": \""+selectedIncident.id+"\" \n}"
-  
+
   var settings = {
     "async": true,
     "crossDomain": true,
@@ -284,7 +284,7 @@ export default class Dashboard extends Component {
       }
       else if (selectedDroneId) {
         controlPanel =
-        <div style={controlPanelStyle}>        
+        <div style={controlPanelStyle}>
       <button onClick = {this.updateMap}>Update Map</button><br/>
           <b>Selected Drone:</b><br/>
           {selectedDroneInfo && selectedDroneInfo.id}
