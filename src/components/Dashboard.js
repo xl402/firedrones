@@ -68,15 +68,7 @@ export default class Dashboard extends Component {
   recallDrone(id) {
     const drones = this.state.drones;
     const recalledDrone = drones.find(drone => drone.id === id);
-    console.log('Recall Drone '+id)
-    console.log(JSON.stringify({ drone_id: recalledDrone.id,
-      d_lon: recalledDrone.current_pos._longitude,
-      d_lat: recalledDrone.current_pos._latitude,
-      event_id: recalledDrone.event_id,
-      speed: recalledDrone.speed,
-      capacity: recalledDrone.capacity,
-      isRecall: true }));
-      
+    
     const insertData = "{\n\t\"drone_id\" : \"" +recalledDrone.id+"\",\n\t\"d_lon\":"+recalledDrone.current_pos._longitude+",\n\t\"d_lat\": "+recalledDrone.current_pos._latitude+",\n\t\"event_id\" : \""+recalledDrone.event_id+"\" ,\n\t\"speed\": "+recalledDrone.speed+",\n\t\"capacity\": "+recalledDrone.capacity+",\n\t\"isRecall\" : true\n}"
     var settings = {
       "async": true,
@@ -108,7 +100,33 @@ export default class Dashboard extends Component {
   }
 
   changeSeverity(id, severity) {
-    console.log('Set severity of incident '+id+' to '+severity)
+    const incidents = this.state.incidents;
+    const selectedIncident = incidents.find(incident => incident.id === id);
+    const insertData = "{\n\t\"description\": \""+selectedIncident.description+"\",\n\t\"image\": \""+selectedIncident.image+"\",\n\t\"lon\": "+selectedIncident.location._longitude+",\n\t\"lat\": "+selectedIncident.location._latitude+",\n\t\"processed\": "+selectedIncident.processed+",\n\t\"severity\": "+severity+",\n\t\"incident_id\": \""+selectedIncident.id+"\" \n}"
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "https://us-central1-firedrones-19.cloudfunctions.net/changeIncident",
+      "method": "PUT",
+      "headers": {
+        "Content-Type": "application/json",
+        "User-Agent": "PostmanRuntime/7.11.0",
+        "Accept": "/",
+        "Cache-Control": "no-cache",
+        "Postman-Token": "eda556e1-b331-41ae-bab8-b5098032a6c7,a7772c80-09bc-4796-9e09-05eabe786227",
+        "Host": "us-central1-firedrones-19.cloudfunctions.net",
+        "accept-encoding": "gzip, deflate",
+        "content-length": "165",
+        "Connection": "keep-alive",
+        "cache-control": "no-cache"
+      },
+      "processData": false,
+      "data": insertData
+    }
+    
+    $.ajax(settings).done(function (response) {
+      console.log(response);
+    });
   }
 
   render() {
