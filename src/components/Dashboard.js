@@ -71,7 +71,7 @@ export default class Dashboard extends Component {
     const drones = this.state.drones;
     const recalledDrone = drones.find(drone => drone.id === id);
 
-    const insertData = "{\n\t\"drone_id\" : \"" +recalledDrone.id+"\",\n\t\"d_lon\":"+recalledDrone.current_pos._longitude+",\n\t\"d_lat\": "+recalledDrone.current_pos._latitude+",\n\t\"event_id\" : \""+recalledDrone.event_id+"\" ,\n\t\"speed\": "+recalledDrone.speed+",\n\t\"capacity\": "+recalledDrone.capacity+",\n\t\"isRecall\" : true\n}"
+    const insertData = "{\n\t\"drone_id\" : \"" +recalledDrone.id+"\",\n\t\"d_lon\":"+recalledDrone.current_pos._longitude+",\n\t\"d_lat\": "+recalledDrone.current_pos._latitude+",\n\t\"event_id\" : \"\" ,\n\t\"speed\": "+recalledDrone.speed+",\n\t\"capacity\": "+recalledDrone.capacity+",\n\t\"isRecall\" : true\n}"
     var settings = {
       "async": true,
       "crossDomain": true,
