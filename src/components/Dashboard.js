@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import IncidentPinpoint from './IncidentPinpoint';
 import DronePinpoint from './DronePinpoint';
+import BasePinpoint from './BasePinpoint';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import $ from "jquery";
 import base64Img from 'base64-img';
@@ -354,6 +355,16 @@ export default class Dashboard extends Component {
                       />
                     )
                   })}
+                  <BasePinpoint
+                  lat={51.5}
+                  lng={0.12}
+                  key='one'
+                />
+                <BasePinpoint
+                  lat={52.0}
+                  lng={-1.0}
+                        key='two'
+                      />
                   </GoogleMapReact>
                 {controlPanel}
               </div>
