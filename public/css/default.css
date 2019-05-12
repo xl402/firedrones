@@ -463,14 +463,17 @@ button,
 input[type="submit"],
 input[type="reset"],
 input[type="button"] {
-   font: 16px/30px 'opensans-bold', sans-serif;
-   background: #11ABB0;
+   font: 13px 'opensans-bold', sans-serif;
+   background: #e25a09;
    display: inline-block;
 	text-decoration: none;
    letter-spacing: 0;
    color: #fff;
-	padding: 12px 20px;
-	margin-bottom: 18px;
+   padding: 5px;
+   margin-right: 3px;
+   margin-left: 0px;
+   margin-top: 7px;
+	margin-bottom: 10px;
    border: none;
    cursor: pointer;
    height: auto;
@@ -485,6 +488,13 @@ input[type="button"] {
    -webkit-border-radius: 3px;
    -khtml-border-radius: 3px;
    border-radius: 3px;
+}
+
+.drone-button {
+   background:blue;
+}
+.drone-button:hover {
+   background: #3d4145;
 }
 
 .button:hover,

@@ -12,8 +12,8 @@ const pinpointStyle = {
     transform: 'translate(-50%, -50%)',
     zIndex: 1,
     position: 'relative',
-    width: '10px',
-    height: '10px'
+    width: '15px',
+    height: '15px'
   }
 
 
