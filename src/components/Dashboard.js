@@ -70,7 +70,7 @@ export default class Dashboard extends Component {
   recallDrone(id) {
     const drones = this.state.drones;
     const recalledDrone = drones.find(drone => drone.id === id);
-    
+
     const insertData = "{\n\t\"drone_id\" : \"" +recalledDrone.id+"\",\n\t\"d_lon\":"+recalledDrone.current_pos._longitude+",\n\t\"d_lat\": "+recalledDrone.current_pos._latitude+",\n\t\"event_id\" : \""+recalledDrone.event_id+"\" ,\n\t\"speed\": "+recalledDrone.speed+",\n\t\"capacity\": "+recalledDrone.capacity+",\n\t\"isRecall\" : true\n}"
     var settings = {
       "async": true,
@@ -92,7 +92,7 @@ export default class Dashboard extends Component {
       "processData": false,
       "data": insertData
     }
-    
+
     $.ajax(settings).done(function (response) {
       console.log(response);
     });
@@ -100,7 +100,7 @@ export default class Dashboard extends Component {
   deleteIncident(id) {
     console.log('Delete Incident '+id)
   }
- 
+
   changeSeverity(id, severity) {
     const incidents = this.state.incidents;
     const selectedIncident = incidents.find(incident => incident.id === id);
@@ -125,7 +125,7 @@ export default class Dashboard extends Component {
       "processData": false,
       "data": insertData
     }
-    
+
     $.ajax(settings).done(function (response) {
       console.log(response);
     });
@@ -155,7 +155,7 @@ export default class Dashboard extends Component {
       "processData": false,
       "data": insertData
     }
-    
+
     $.ajax(settings).done(function (response) {
       console.log(response);
     });
@@ -203,13 +203,13 @@ export default class Dashboard extends Component {
         controlPanel =
         <div style={controlPanelStyle}>
           <b>Selected Incident:</b><br/>
-          {selectedIncidentInfo && selectedIncidentInfo.id} 
+          {selectedIncidentInfo && selectedIncidentInfo.id}
         <br/>
           <b>Description:</b> <br/>
-          {selectedIncidentInfo && selectedIncidentInfo.description} 
+          {selectedIncidentInfo && selectedIncidentInfo.description}
         <br/>
         <b>Processing state:</b> <br/>
-          {processingState} 
+          {processingState}
         <br/>
           <b>Assigned drones:</b> <br/>
           {assignedDrone ? assignedDrone : 'Currently none assigned'}<br/>
@@ -219,50 +219,50 @@ export default class Dashboard extends Component {
           <b>Set incident severity:</b> <br/>
           <button onClick={() => this.changeSeverity(selectedIncidentId, 1)}>
             1
-          </button> 
+          </button>
           <button onClick={() => this.changeSeverity(selectedIncidentId, 2)}>
             2
-          </button> 
+          </button>
           <button onClick={() => this.changeSeverity(selectedIncidentId, 3)}>
             3
-          </button> 
+          </button>
           <button onClick={() => this.changeSeverity(selectedIncidentId, 4)}>
             4
-          </button> 
+          </button>
           <button onClick={() => this.changeSeverity(selectedIncidentId, 5)}>
             5
           </button> <br/>
           <b>Set incident processing:</b> <br/>
           <button onClick={() => this.changeProcessing(selectedIncidentId, 0)}>
             0
-          </button> 
+          </button>
           <button onClick={() => this.changeProcessing(selectedIncidentId, 1)}>
             1
-          </button> 
+          </button>
           <button onClick={() => this.changeProcessing(selectedIncidentId, 2)}>
             2
-          </button> 
+          </button>
           <button onClick={() => this.changeProcessing(selectedIncidentId, 3)}>
             3
-          </button> 
+          </button>
         </div>
       }
       else if (selectedDroneId) {
         controlPanel =
         <div style={controlPanelStyle}>
           <b>Selected Drone:</b><br/>
-          {selectedDroneInfo && selectedDroneInfo.id} 
+          {selectedDroneInfo && selectedDroneInfo.id}
           <br/>
-          <b>Capacity:</b> <br/> 
+          <b>Capacity:</b> <br/>
           {selectedDroneInfo && selectedDroneInfo.capacity}
           <br/>
-          <b>Speed:</b> <br/> 
+          <b>Speed:</b> <br/>
           {selectedDroneInfo && selectedDroneInfo.speed}
           <br/>
-          <b>Recalled:</b> <br/> 
+          <b>Recalled:</b> <br/>
           {selectedDroneInfo.isRecall ? 'Yes' : 'No'}
           <br/>
-        <b>Assigned to incident:</b><br/> 
+        <b>Assigned to incident:</b><br/>
           {selectedDroneInfo.event_id ? selectedDroneInfo.event_id : 'Currently unassigned'}<br/>
           <button className='drone-button' onClick={() => this.recallDrone(selectedDroneId)}>
             Recall Drone
@@ -318,7 +318,7 @@ export default class Dashboard extends Component {
                       />
                     )
                   })}
-                  </GoogleMapReact> 
+                  </GoogleMapReact>
                 {controlPanel}
               </div>
           </div>
