@@ -24,10 +24,6 @@ export default class IncidentPinpoint extends Component {
     //To rerender when on/off hover
   shouldComponentUpdate = shouldPureComponentUpdate;
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     // const popupHoverStyle = this.props.$hover ? popupStyle : {display:'none', zIndex: 99  };
     let pinpointColor;

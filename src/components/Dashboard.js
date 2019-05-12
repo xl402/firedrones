@@ -4,6 +4,7 @@ import IncidentPinpoint from './IncidentPinpoint';
 import DronePinpoint from './DronePinpoint';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import $ from "jquery";
+import base64Img from 'base64-img';
 
 const controlPanelStyle = {height: '100%', width: '30%', lineHeight: '14px', paddingLeft: '15px'}
 export default class Dashboard extends Component {
@@ -75,6 +76,15 @@ export default class Dashboard extends Component {
           drones: json,
         })
       });
+      // if (this.state.isIncidentsLoaded && this.state.isDronesLoaded) {
+      //   const unprocessedIncidents = this.state.incidents.filter(incident => incident.processed === 0);
+      //   const unprocessedImageCodes = unprocessedIncidents.map(incident => incident.image);
+      //   console.log(unprocessedImageCodes);
+      //   unprocessedIncidents.forEach(incident => { 
+      //     var filepath = base64Img.imgSync('data:image/png;base64,'.concat(incident.image), '', incident.id);
+      //     console.log('file created?'+incident.id);
+      //   });
+      // }
   }
 
   setIncident(id) {
@@ -125,28 +135,28 @@ export default class Dashboard extends Component {
   changeSeverity(id, severity) {
     const incidents = this.state.incidents;
     const selectedIncident = incidents.find(incident => incident.id === id);
-    const insertData = "{\n\t\"description\": \""+selectedIncident.description+"\",\n\t\"image\": \""+selectedIncident.image+"\",\n\t\"lon\": "+selectedIncident.location._longitude+",\n\t\"lat\": "+selectedIncident.location._latitude+",\n\t\"processed\": "+selectedIncident.processed+",\n\t\"severity\": "+severity+",\n\t\"incident_id\": \""+selectedIncident.id+"\" \n}"
-    var settings = {
-      "async": true,
-      "crossDomain": true,
-      "url": "https://us-central1-firedrones-19.cloudfunctions.net/changeIncident",
-      "method": "PUT",
-      "headers": {
-        "Content-Type": "application/json",
-        "User-Agent": "PostmanRuntime/7.11.0",
-        "Accept": "/",
-        "Cache-Control": "no-cache",
-        "Postman-Token": "eda556e1-b331-41ae-bab8-b5098032a6c7,a7772c80-09bc-4796-9e09-05eabe786227",
-        "Host": "us-central1-firedrones-19.cloudfunctions.net",
-        "accept-encoding": "gzip, deflate",
-        "content-length": "165",
-        "Connection": "keep-alive",
-        "cache-control": "no-cache"
-      },
-      "processData": false,
-      "data": insertData
-    }
-
+    const insertData = "{\n\t\"processed\": "+selectedIncident.processed+",\n\t\"severity\": "+severity+",\n\t\"incident_id\": \""+selectedIncident.id+"\" \n}"
+  
+  var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "https://us-central1-firedrones-19.cloudfunctions.net/changeIncident2",
+    "method": "PUT",
+    "headers": {
+      "Content-Type": "application/json",
+      "User-Agent": "PostmanRuntime/7.11.0",
+      "Accept": "/",
+      "Cache-Control": "no-cache",
+      "Postman-Token": "13342037-0f12-4189-b59f-ed7493ecaccc,1559dfd4-5e5c-4393-b365-d668e885e33f",
+      "Host": "us-central1-firedrones-19.cloudfunctions.net",
+      "accept-encoding": "gzip, deflate",
+      "content-length": "76",
+      "Connection": "keep-alive",
+      "cache-control": "no-cache"
+    },
+    "processData": false,
+    "data": insertData
+  }
     $.ajax(settings).done(function (response) {
       console.log(response);
     }).then(() => this.updateMap());
@@ -155,30 +165,30 @@ export default class Dashboard extends Component {
   changeProcessing(id, processing) {
     const incidents = this.state.incidents;
     const selectedIncident = incidents.find(incident => incident.id === id);
-    const insertData = "{\n\t\"description\": \""+selectedIncident.description+"\",\n\t\"image\": \""+selectedIncident.image+"\",\n\t\"lon\": "+selectedIncident.location._longitude+",\n\t\"lat\": "+selectedIncident.location._latitude+",\n\t\"processed\": "+processing+",\n\t\"severity\": "+selectedIncident.severity+",\n\t\"incident_id\": \""+selectedIncident.id+"\" \n}"
-    var settings = {
-      "async": true,
-      "crossDomain": true,
-      "url": "https://us-central1-firedrones-19.cloudfunctions.net/changeIncident",
-      "method": "PUT",
-      "headers": {
-        "Content-Type": "application/json",
-        "User-Agent": "PostmanRuntime/7.11.0",
-        "Accept": "/",
-        "Cache-Control": "no-cache",
-        "Postman-Token": "eda556e1-b331-41ae-bab8-b5098032a6c7,a7772c80-09bc-4796-9e09-05eabe786227",
-        "Host": "us-central1-firedrones-19.cloudfunctions.net",
-        "accept-encoding": "gzip, deflate",
-        "content-length": "165",
-        "Connection": "keep-alive",
-        "cache-control": "no-cache"
-      },
-      "processData": false,
-      "data": insertData
-    }
-
+    const insertData = "{\n\t\"processed\": "+processing+",\n\t\"severity\": "+selectedIncident.severity+",\n\t\"incident_id\": \""+selectedIncident.id+"\" \n}"
+  
+  var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "https://us-central1-firedrones-19.cloudfunctions.net/changeIncident2",
+    "method": "PUT",
+    "headers": {
+      "Content-Type": "application/json",
+      "User-Agent": "PostmanRuntime/7.11.0",
+      "Accept": "/",
+      "Cache-Control": "no-cache",
+      "Postman-Token": "13342037-0f12-4189-b59f-ed7493ecaccc,1559dfd4-5e5c-4393-b365-d668e885e33f",
+      "Host": "us-central1-firedrones-19.cloudfunctions.net",
+      "accept-encoding": "gzip, deflate",
+      "content-length": "76",
+      "Connection": "keep-alive",
+      "cache-control": "no-cache"
+    },
+    "processData": false,
+    "data": insertData
+  }
     $.ajax(settings).done(function (response) {
-      console.log(response)
+      console.log(response);
     }).then(() => this.updateMap());
   }
 
