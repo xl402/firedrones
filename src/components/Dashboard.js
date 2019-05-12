@@ -5,9 +5,7 @@ import DronePinpoint from './DronePinpoint';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import $ from "jquery";
 
-const controlPanelStyle = {height: '100%', width: '30%', lineHeight: '17px', paddingLeft: '15px'}
-
-const buttonStyle = {background: '#e25a09'}
+const controlPanelStyle = {height: '100%', width: '30%', lineHeight: '14px', paddingLeft: '15px'}
 export default class Dashboard extends Component {
 
   constructor(props) {
@@ -17,6 +15,7 @@ export default class Dashboard extends Component {
     this.recallDrone = this.recallDrone.bind(this);
     this.deleteIncident = this.deleteIncident.bind(this);
     this.changeSeverity = this.changeSeverity.bind(this);
+    this.updateMap = this.updateMap.bind(this);
 
     this.state = {
       incidents: [],
@@ -59,6 +58,25 @@ export default class Dashboard extends Component {
 
   shouldComponentUpdate = shouldPureComponentUpdate;
 
+  updateMap() {
+    fetch("https://us-central1-firedrones-19.cloudfunctions.net/getIncidents")
+      .then(res => res.json())
+      .then(json => {
+        this.setState({
+          isIncidentsLoaded: true,
+          incidents: json,
+        })
+      });
+      fetch("https://us-central1-firedrones-19.cloudfunctions.net/getDrones")
+      .then(res => res.json())
+      .then(json => {
+        this.setState({
+          isDronesLoaded: true,
+          drones: json,
+        })
+      });
+  }
+
   setIncident(id) {
     this.setState({selectedIncident: id, selectedDrone: ''});
   }
@@ -67,10 +85,10 @@ export default class Dashboard extends Component {
     this.setState({selectedIncident: '', selectedDrone: id});
   }
 
+  //Toggles drone recall- TBD
   recallDrone(id) {
     const drones = this.state.drones;
     const recalledDrone = drones.find(drone => drone.id === id);
-
     const insertData = "{\n\t\"drone_id\" : \"" +recalledDrone.id+"\",\n\t\"d_lon\":"+recalledDrone.current_pos._longitude+",\n\t\"d_lat\": "+recalledDrone.current_pos._latitude+",\n\t\"event_id\" : \"\" ,\n\t\"speed\": "+recalledDrone.speed+",\n\t\"capacity\": "+recalledDrone.capacity+",\n\t\"isRecall\" : true\n}"
     var settings = {
       "async": true,
@@ -180,6 +198,9 @@ export default class Dashboard extends Component {
       const selectedDroneInfo = drones.find(drone => drone.id === selectedDroneId);
       const assignedDrone = drones.find(drone => drone.event_id === selectedIncidentId);
 
+      const assignedDroneDisplay = selectedIncidentInfo && selectedIncidentInfo.processed === 3 ? '' : <span><b>Assigned drones:</b> <br/>
+      {assignedDrone ? assignedDrone.id : 'Currently none assigned'}<br/></span>
+
       let processingState;
       switch(selectedIncidentInfo && selectedIncidentInfo.processed) {
         case 0:
@@ -202,6 +223,7 @@ export default class Dashboard extends Component {
       if (selectedIncidentId) {
         controlPanel =
         <div style={controlPanelStyle}>
+        <button onClick = {this.updateMap}>Update Map</button><br/>
           <b>Selected Incident:</b><br/>
           {selectedIncidentInfo && selectedIncidentInfo.id}
         <br/>
@@ -211,8 +233,7 @@ export default class Dashboard extends Component {
         <b>Processing state:</b> <br/>
           {processingState}
         <br/>
-          <b>Assigned drones:</b> <br/>
-          {assignedDrone ? assignedDrone.id : 'Currently none assigned'}<br/>
+          {assignedDroneDisplay}
           <button style={{marginTop: '12px'}} onClick={() => this.deleteIncident(selectedIncidentId)}>
             Delete Incident
           </button><br/>
@@ -249,7 +270,8 @@ export default class Dashboard extends Component {
       }
       else if (selectedDroneId) {
         controlPanel =
-        <div style={controlPanelStyle}>
+        <div style={controlPanelStyle}>        
+      <button onClick = {this.updateMap}>Update Map</button><br/>
           <b>Selected Drone:</b><br/>
           {selectedDroneInfo && selectedDroneInfo.id}
           <br/>
@@ -272,6 +294,7 @@ export default class Dashboard extends Component {
       else {
         controlPanel =
         <div style={controlPanelStyle}>
+        <button onClick = {this.updateMap}>Update Map</button><br/>
         <p>
           <b>Select an incident or a drone for options.</b>
         </p>
