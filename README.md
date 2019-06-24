@@ -1,9 +1,7 @@
 # Firedrones
-**Winner of Alchera Best Tech Award**
+**WINNER of Alchera Best Tech Award**
 
 Please visit: https://firedrones-19.firebaseapp.com/
-
-Note: Please use desktop environment (not responsive to aspect ratios on smartphones)
 
 Submitted as part of the Sudo City Challenge : https://www.sudochallenge.com/
 
