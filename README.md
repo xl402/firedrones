@@ -1,4 +1,5 @@
 # Firedrones
+**Winner of Alchera Best Tech Award**
 Please visit: https://firedrones-19.firebaseapp.com/
 
 Note: Please use desktop environment (not responsive to aspect ratios on smartphones)
